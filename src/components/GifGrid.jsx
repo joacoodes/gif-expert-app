@@ -1,18 +1,31 @@
 import { getGifs } from "../helpers/getGifs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const GifGrid = ( {category} ) => {
 
-    // useEffect sirve para disparar efectos secundarios en cualquier punto
+    const [images, setImages] = useState([]); 
 
+    const getImages = async() => {
+      const newImages = await getGifs( category );
+      setImages( newImages );
+    }
+
+
+    // useEffect sirve para disparar efectos secundarios en cualquier punto
     useEffect( () => {
-      getGifs(category);
+      getImages();
     }, []);
 
   return (
     <>
-        <h3> {category} </h3>
-        <p> Hola Mundo </p>
+      <ol>
+        {
+          images.map((img) => (
+           <li key={ img.id }>{ img.title }</li>
+           )
+          )
+        }
+      </ol>
     </>
   )
 }
