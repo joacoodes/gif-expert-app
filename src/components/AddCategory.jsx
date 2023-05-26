@@ -17,6 +17,8 @@ export const AddCategory = ({ onNewCategory }) => {
     setInputValue('');
   }
 
+  console.log('value ->', inputValue);
+
   return (
       <form onSubmit={ onSubmit }>
         <input 
